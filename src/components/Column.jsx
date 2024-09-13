@@ -1,4 +1,4 @@
-import { useStore } from 'zustand'
+import { useStore } from '../store'
 import './Column.css'
 import Task from './Task'
 import { shallow } from 'zustand/shallow'

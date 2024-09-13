@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useStore } from '../store'
 import './Column.css'
 import Task from './Task'
 import { shallow } from 'zustand/shallow'
 import classNames from 'classnames'
 
-export default function Column({state}) {
+export default function Column({ state }) {
     const [text, setText] = useState('')
     const [open, setOpen] = useState(false)
     const [drop, setDrop] = useState(false)
@@ -19,7 +19,7 @@ export default function Column({state}) {
     const moveTask = useStore((store) => store.moveTask)
     return (
         <div
-            className={classNames("column", {drop})}
+            className={classNames("column", { drop })}
             onDragOver={(e) => {
                 setDrop(true)
                 e.preventDefault()

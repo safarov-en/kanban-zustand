@@ -1,9 +1,10 @@
 import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
 
 const store = (set) => ({
     tasks: [{ title: 'TestTask', state: "PLANNED" }],
     draggedTask: null,
-    addTask: (title, state) => set((store) => ({ tasks: [...store.tasks, { title, state }] })),
+    addTask: (title, state) => set((store) => ({ tasks: [...store.tasks, { title, state }] }), false, 'addTask'),
     deleteTask: (title) =>
         set((store) => ({
             tasks: store.tasks.filter((task) => task.title !== title)
@@ -16,4 +17,4 @@ const store = (set) => ({
     }))
 })
 
-export const useStore = create(store)
+export const useStore = create(persist(devtools(store), {name: "store"}))

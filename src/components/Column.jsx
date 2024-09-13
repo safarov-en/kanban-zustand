@@ -29,6 +29,7 @@ export default function Column({state}) {
                 e.preventDefault()
             }}
             onDrop={(e) => {
+                setDrop(false)
                 moveTask(draggedTask, state)
                 setDraggedTask(null)
             }}

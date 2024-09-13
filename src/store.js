@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
 const store = (set) => ({
-    tasks: [{ title: 'TestTask', state: "PLANNED" }],
+    tasks: [],
     draggedTask: null,
     addTask: (title, state) => set((store) => ({ tasks: [...store.tasks, { title, state }] }), false, 'addTask'),
     deleteTask: (title) =>
@@ -17,4 +17,13 @@ const store = (set) => ({
     }))
 })
 
-export const useStore = create(persist(devtools(store), {name: "store"}))
+const log = (config) => (set, get, api) =>
+    config(
+        (...args) => {
+            set(...args)
+        },
+        get,
+        api
+    )
+
+export const useStore = create(log(persist(devtools(store), {name: "store"})))
